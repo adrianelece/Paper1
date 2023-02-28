@@ -111,3 +111,16 @@ Regsless50kb = paste0(gsub("chr","",peakAnnodf_tss$seqnames),":",peakAnnodf_tss$
 write.table(Regsless50kb,"RegsLess50kb7x.txt",quote = F,col.names = F,row.names = F)
 
 ```
+
+
+## Crear regiones en el archivo de methylation
+
+```
+for file in XXX_*; do echo $file; awk '{print $0"\t"$1":"$2"-"$3}' $file > "clean_"$file; done
+```
+
+## Crear el archivo para DSS
+```
+dos2unix RegsLess50kb7x.txt
+for file in clean_*; do echo $file; grep -Fwf RegsLess50kb7x.txt $file | awk '{print "chr"$1"\t"$2"\t"$5"\t"$6}' > DSS/"DSS_"$file ; done
+```
