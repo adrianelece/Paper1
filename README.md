@@ -30,3 +30,25 @@ mv allregions.txt2 allregions.txt
 ```
 python DatabyDir.py -r allregions.txt -s /folder/ -p "network*.tsv" -o AllSamples.tsv
 ```
+
+## Clean the matrix
+El output del programa anterior debe tener este aspecto 
+
+```
+10:100000318-100000330  1.0     .       1.0     .       .       1.0
+        10:10000038-10000038    .       0.9     .       .       .       .
+        10:100000448-100000462  1.0     0.75    1.0     1.0     .       1.0
+        10:100001141-100001146  0.75    1.0     1.0     .       .       .
+        10:100001344-100001354  0.667   1.0     1.0     1.0     .       .
+        10:100002015-100002025  .       1.0     .       .       .       1.0
+        10:10000309-10000309    0.667   1.0     .       .       .       .
+        10:10000320-10000320    .       1.0     .       .       .       .
+        10:100003781-100003781  1.0     .       .       .       .       .
+
+```
+
+Hay que limpiar las regiones con que tengan un . en alguna muestra. Para ello:
+
+```
+awk '($2!="."&&$3!="."&&$4!="."&&$5!="."&&$6!="."&&$7!="."){print $0}' AllSamples.tsv > RegsInAllSamples.txt
+```
