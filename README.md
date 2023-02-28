@@ -28,5 +28,5 @@ mv allregions.txt2 allregions.txt
 
 ## Extraer las regiones de la lista
 ```
-python ../DatabyDir.py -r /datasets/work/af-dairy-cpg/work/INIA/reanalysesMarch/7x/allregions.txt -s /datasets/work/af-dairy-cpg/work/INIA/reanalysesMarch/7x/ -p "network*.tsv" -o /datasets/work/af-dairy-cpg/work/INIA/reanalysesMarch/7x/AllSamples.tsv
+python DatabyDir.py -r allregions.txt -s /folder/ -p "network*.tsv" -o AllSamples.tsv
 ```
