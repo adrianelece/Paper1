@@ -593,3 +593,21 @@ tiff("euler.tiff", width = 40, height = 20, pointsize = 1/300, units = 'cm', res
 plot(euler(genes, shape = "ellipse"),fills=wes_palette("Chevalier1")[1:4], labels = c("ONT 4x","RRBS","ONT 7x","ONT 10x"), quantities = TRUE)
 dev.off()
 ```
+
+
+## QTL
+QTL file for ARS-1.2 cattle genome can be downloaded from 
+> https://www.animalgenome.org/cgi-bin/QTLdb/BT/download?d=0RxrNMbA8WzeDHyKIdCOL
+
+This file need to be trimmed by removing innacurate regions (with start position higher than end and negative positions. We can use the following command:
+>  awk '($2<$3&&$2>0){print $0}' QTL.bed > QTL_trimmed.bed
+
+Necesitamos coger las DMCs unicamente con chr pos pos. Hay que filtrar el DMC delta FDR para que tenga esa pinta
+
+
+Bedtools is used to find the overlapping regions using the intersect option:
+> bedtools intersect -a QTL_trimmed.bed -b DMR.bed -wa | uniq > QTLsInDMR.tsv
+
+We can also trim the file to only keep the coordinates and QTL associated to that region for further analyses:
+> cut -f1,2,3,4 QTLsInDMR.tsv > QTLsInDMR_trimmed.tsv
+
