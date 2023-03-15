@@ -106,7 +106,7 @@ peakAnno <- annotatePeak(peak, tssRegion=c(-3000, 3000),
 plotAnnoPie(peakAnno)
 peakAnnodf=data.frame(peakAnno)
 
-peakAnnodf_tss = peakAnnodf[which(peakAnnodf$distanceToTSS<=50000),]
+peakAnnodf_tss = peakAnnodf[which(abs(peakAnnodf$distanceToTSS)<=50000),]
 Regsless50kb = paste0(gsub("chr","",peakAnnodf_tss$seqnames),":",peakAnnodf_tss$start)
 write.table(Regsless50kb,"RegsLess50kb7x.txt",quote = F,col.names = F,row.names = F)
 
